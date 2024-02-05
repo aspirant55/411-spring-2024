@@ -7,7 +7,7 @@ The assignment is worth a total of 100 points.  Feel free to drop by our
 office hours or post your questions directly on the `Ed Discussion` forum.
 
 ## 1. HexDump (45 pts)
-Write a program that reads in a *binary file* and dumps the contents 
+Write a program that reads in a *binary file* and dumps its contents 
 to the *standard output*.  It should work similar to the `hexdump` utility.  
 
 > [!TIP]
@@ -63,32 +63,84 @@ $ ./hexdump file.bin 8 x
 ```
 
 ## `2. IPv4 Addresses (55 pts)`
-In this problem, your program will read a databank of *IP addresses* and their respective *subnet masks*.  The databank is stored as a *binary file* in which every chunk of 5 consecutive bytes represents an IP address and the number of bits in the subnet mask.  The goal of your program is to read the information provided in the databank and display the following information corresponding to each pair of IP address and subnet mask:
+In this problem, your program will decode a databank of *IP addresses* and 
+their respective *subnet masks*.  
 
-- the IP address
-- the network address
-- the usable IP range for hosts
-- the subnet mask
+Your mission:
+
+- **Open the databank:** Read in the binary file containing the encoded addresses
+- **Decode the binary data:** Each 5-byte sequence stores an IP address using 4 bytes
+  and the number of bits in the subnet mask using 1 byte
+- **Display the information:** Output the following for each pair (IP, mask):
+  - IP address
+  - subnet mask
+  - network address
+  - the usable IP range for hosts
 
 ### What is an IP address?
-An IP address is a 32-bit number used to uniquely identify a device on a TCP/IP network.   The bitstring can also be expressed in `dotted-decimal` format, with four decimal numbers separated by periods, such as `131.128.81.111`.  In order to translate a bitstring into the corresponding dotted-decimal format, the 32-bit string is divided 4 8-bit sections, known as `octects`, and each of the four octects is converted into a decimal number.  For the IP address provided above the corresponding 32-bit string is `10000011 10000000 01010001 01101111`.
+An IP address is a 32-bit number used to uniquely identify a device on a 
+TCP/IP network.  It can be written in two ways:
 
-A TCP/IP network can be seen as a collection of networks, and routers that pass data (packets) between networks.  For this reason, IP addresses have two parts, the `network  address` and the `host address`.  Packets are first routed to the destination network, and then delivered to the destination host.
+- *dotted-decimal format:* four decimal numbers separated by periods,
+  e.g., `131.128.81.111`
+- *binary format:* a 32-bit sequence of bits, e.g., `10000011 10000000 01010001 01101111`
 
-### What is a subnet mask?
-A `subnet mask` is another 32-bit number used to split an IP address into network address and host address.  A mask contains a number of consecutive 1s followed by a number of consecutive 0s, and can be expressed in dotted-decimal format.  For example, the mask `11111111 11111111 11111111 00000000` is also `255.255.255.0`.  This mask indicates that the first 24 bits should be use for the network address, and the remaining 8 bits for the host address.  By applying bitwise operations between the subnet mask and the ip address, routers (and applications) are able to extract the network address and the host address from IP addresses.
+To convert between formats:
 
-> *CIDR notation* is a compact representation of an IP address and its associated network mask.  In this notation, an IP address is followed by a slash (`'/'`) character, and a decimal number.  The decimal number is the count of leading 1 bits in the subnet mask.  For example, `131.128.81.111/24` is a compact representation of the IP address and subnet mask provided above.
+- *binary to dotted-decimal:* divide the bit sequence into 4 8-bit sections (`octects`)
+  and convert each octect to decimal
+- *dotted-decimal to binary:* convert each decimal number to a sequence of 8-bits
+  (padded with zeros) and combine them
 
-The illustration below shows a detailed example with a different IP address.  Note that the `binary encoding` in the figure is the representation used to store IP addresses in the binary databank:
+### Network and Host Addresses
+
+IP addresses have two parts:
+
+- *network address:* identifies an specific network within the *TCP/IP network*
+- *host address:* identifies an specific device within that network
+
+Packets (data) are first routed to the destination network using the network address, 
+and then delivered to the correct device using the host address.
+
+### Subnet Mask
+
+A `subnet mask` is a 32-bit number used to split an IP address into its network 
+address and host address.  This mask consists of consecutive 1s followed by
+consecutive 0s,  It can be expressed in dotted-decimal format just like an IP,
+e.g., `11111111 11111111 11111111 00000000` is represented by `255.255.255.0`.  
+
+> [!NOTE]
+> The 1s indicate the bits used for the network address, while the 0s indicate
+> the bits used for the host address.  Bitwise operations between the subnet
+> mask and the IP address extract these parts.
+
+### CIDR Notation
+
+A compact way to express an IP address and its subnet mask.  In this notation, 
+an IP address is followed by '/' and a decimal number.  The decimal number is 
+the count of leading 1s in the subnet mask.  For example, in `131.128.81.111/24` 
+24 indicates the count of leading 1s in the mask.
+
+### From Binary Encoding to IP and Network Addresses
+
+The illustration below shows a detailed example.  Note that the `binary encoding` 
+in the figure is the representation used to store IP addresses in the binary 
+databank.
 
 ![IPv4 addresses and subnet masks](ipv4-encoding.jpg)
 
-The following figure shows a detailed example on how to calculate the range of available host addresses in the network, given an IP address and a subnet mask.  Note that the first and last addresses of the available range are not considered valid host addresses as they are reserved as `network address` and `broadcast address`. 
+### Host Range Calculation
+
+The following figure shows a how to calculate the range of available host addresses, 
+given an IP address and a subnet mask.  Note that the first and last addresses of the 
+available range are not considered valid host addresses as they are reserved as 
+`network address` and `broadcast address`. 
 
 ![Available host range](host-range.jpg)
 
-> When working on this assignment you might find useful a tool that can give you the correct calculations.  Feel free to refer to this [IP subnet calculator](https://www.calculator.net/ip-subnet-calculator.html).
+> When working on this assignment you might find useful this
+> [IP subnet calculator](https://www.calculator.net/ip-subnet-calculator.html)
+> that can give you the correct calculations.
 
 ### Input
 Your program will receive the following command line arguments:
