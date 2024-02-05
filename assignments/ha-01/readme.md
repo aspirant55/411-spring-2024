@@ -138,45 +138,72 @@ available range are not considered valid host addresses as they are reserved as
 
 ![Available host range](host-range.jpg)
 
+> [!TIP]
 > When working on this assignment you might find useful this
 > [IP subnet calculator](https://www.calculator.net/ip-subnet-calculator.html)
 > that can give you the correct calculations.
 
 ### Input
 Your program will receive the following command line arguments:
+
 ```text
 <fname> File name for the binary file
 ```
 
-The line below shows an example of using your program:
+The line below shows an example of invoking your program upon a file 
+named `file.bin`.
+
 ```bash
 $ ./decode-ipv4 file.bin
 ```
 
 ### Output
-Your program should send output to the `stdout` in text form.  For each consecutive 5 bytes in the binary file, you will print the corresponding IP/Subnet information.  Each chunk of 5 bytes represents an IP (4 bytes) followed by the number of 1s in the subnet mask (1 byte).  Check the example below for more details, assuming the input file contains 15 bytes.
+Your program should output the databank information to the `stdout`.  For each 
+consecutive 5 bytes in the binary file, display the corresponding IP/Subnet information.  
+Each chunk of 5 bytes encodes an IP (4 bytes) followed by the number of 1s in the 
+subnet mask (1 byte).
+
+Observe the example below, revealing the IPs encoded in `file.bin` (file size is 15 bytes).
 
 ```bash
 $ ./decode-ipv4 file.bin
-IP address:      222.110.11.20
-Network address: 222.110.11.0
-Usable IP range: 222.110.11.1 - 222.110.11.62
-Subnet mask:     255.255.255.192
+IP address:        222.110.11.20
+Subnet mask:       255.255.255.192
+Usable IP range:   222.110.11.1 - 222.110.11.62
+Network address:   222.110.11.0
+Broadcast address: 
 
-IP address:      148.31.27.2
-Network address: 148.31.27.0
-Usable IP range: 148.31.27.1 - 148.31.27.254
-Subnet mask:     255.255.255.0
+IP address:        148.31.27.2
+Subnet mask:       255.255.255.0
+Usable IP range:   148.31.27.1 - 148.31.27.254
+Network address:   148.31.27.0
+Broadcast address: 
 
-IP address:      32.10.10.1
-Network address: 32.8.0.0
-Usable IP range: 32.8.0.1 - 32.11.255.254
-Subnet mask:     255.252.0.0
+IP address:        32.10.10.1
+Subnet mask:       255.252.0.0
+Usable IP range:   32.8.0.1 - 32.11.255.254
+Network address:   32.8.0.0
+Broadcast address: 
 ```
 
 ## Submission and Grading
-You will submit two files named `hexdump.c` and `decode-ipv4.c`.  Each file/program should include its own `main` function.  You are required to provide meaningful comments in all your functions and use proper coding style and indentation.  Your submission will be tested and graded by an autograder using `gcc` on a `linux` machine, for this reason it cannot be stressed enough that your program must follow the exact specifications for input and output upon submission, including the number of whitespaces.
 
-For each of the questions you either pass the test cases (full points) or not (zero points).  To submit your solution to Gradescope, simply select and upload the two required files.
+This assignment uses an autograder. For each of the questions you either pass 
+the test cases (full points) or not (zero points). To ensure compatibility 
+with the autograder, your program must follow the specifications provided 
+above, in particular, using the exact input/output requirements.
 
-> :heavy_exclamation_mark: You must be reminded that students caught cheating or plagiarizing will receive `no credit`. Additional actions, including a failing grade in the class or referring the case for disciplinary action, may also be taken.
+You will submit two files named `hexdump.c` and `decode-ipv4.c` via 
+Gradescope.  The autograder runs `gcc` on a `linux` machine.  It is 
+imperative that you ensure your code compiles and executes properly 
+with the `gcc` compiler.
+
+> [!IMPORTANT]
+> You are **required** to provide meaningful comments and use proper
+> coding style and indentation.
+
+> [!CAUTION]
+> Remember, academic integrity is of utmost importance.  Any attempts at
+> cheating or plagiarism will result in a forfeiture of credit.  Potential
+> further actions include failing the class or referring the case for
+> disciplinary measures.
