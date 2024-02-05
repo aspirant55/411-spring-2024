@@ -193,14 +193,14 @@ the test cases (full points) or not (zero points). To ensure compatibility
 with the autograder, your program must follow the specifications provided 
 above, in particular, using the exact input/output requirements.
 
+> [!IMPORTANT]
+> You are **required** to provide meaningful comments and use proper
+> coding style and indentation.
+
 You will submit two files named `hexdump.c` and `decode-ipv4.c` via 
 Gradescope.  The autograder runs `gcc` on a `linux` machine.  It is 
 imperative that you ensure your code compiles and executes properly 
 with the `gcc` compiler.
-
-> [!IMPORTANT]
-> You are **required** to provide meaningful comments and use proper
-> coding style and indentation.
 
 > [!CAUTION]
 > Remember, academic integrity is of utmost importance.  Any attempts at
