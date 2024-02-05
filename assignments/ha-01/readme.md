@@ -52,11 +52,11 @@ Your program should output the contents of the binary file to the
 Observe the examples below, revealing the 20 bytes within `file.bin`.
 
 ```bash
-$ ./hexdump file.bin 16
+$ ./hexdump file.bin 16 x
 00000000 cf fa ed fe 07 00 00 01 03 00 00 00 02 00 00 00
 00000010 0e 00 00 00
 $
-$ ./hexdump file.bin 8
+$ ./hexdump file.bin 8 x
 00000000 cf fa ed fe 07 00 00 01 
 00000008 03 00 00 00 02 00 00 00
 00000010 0e 00 00 00
