@@ -2,7 +2,6 @@
 
 This assignment takes you on a deep dive into **binary files**, 
 **number systems**, and the power of of **bitwise operators** in `C`.  
-
 The assignment is worth a total of 100 points.  Feel free to drop by our 
 office hours or post your questions directly on the `Ed Discussion` forum.
 
