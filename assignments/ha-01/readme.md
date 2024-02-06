@@ -14,7 +14,7 @@ to the *standard output*.  It should work similar to the `hexdump` utility.
 > within the `fread` documentation.  Master the following functions `fopen/fclose`,
 > `fseek/ftell/rewind`, and `malloc/free`.
 
-Take notice of the general advise for file manipulation:
+Take notice of this general advise for file manipulation:
 
 - create pointers for both the input file and the buffer in memory
 - open the file in `rb` mode and check for successful file opening
@@ -41,7 +41,7 @@ $ ./hexdump file.bin 16 x
 
 ### Output
 Your program should output the contents of the binary file to the 
-`stdout` using the following instructions:
+`stdout` using the following specification:
 
 - each row of the output displays the index of the first byte, followed
   by a maximum of `N` bytes using the notation indicated by `<base>`
@@ -67,15 +67,16 @@ their respective *subnet masks*.
 
 Your mission:
 
-- **Open the databank:** Read in the binary file containing the encoded addresses
-- **Decode the binary data:** Each 5-byte sequence stores an IP address using 4 bytes
-  and the number of bits in the subnet mask using 1 byte
-- **Display the information:** Output the following for each pair (IP, mask):
+- **Open the databank:** read in the binary file containing the encoded addresses
+- **Decode the binary data:** each 5-byte sequence stores an IP address (4 bytes)
+  and the number of bits in the subnet mask (1 byte)
+- **Display the information:** output the following for each pair (IP, mask):
   - IP address
   - subnet mask
-  - network address
   - the usable IP range for hosts
-
+  - network address
+  - broadcast address
+  
 ### What is an IP address?
 An IP address is a 32-bit number used to uniquely identify a device on a 
 TCP/IP network.  It can be written in two ways:
@@ -89,7 +90,7 @@ To convert between formats:
 - *binary to dotted-decimal:* divide the bit sequence into 4 8-bit sections (`octects`)
   and convert each octect to decimal
 - *dotted-decimal to binary:* convert each decimal number to a sequence of 8-bits
-  (padded with zeros) and combine them
+  (left-padded with zeros) and combine them
 
 ### Network and Host Addresses
 
@@ -115,7 +116,7 @@ e.g., `11111111 11111111 11111111 00000000` is represented by `255.255.255.0`.
 
 ### CIDR Notation
 
-A compact way to express an IP address and its subnet mask.  In this notation, 
+This is a compact way to express an IP address and its subnet mask.  In this notation, 
 an IP address is followed by '/' and a decimal number.  The decimal number is 
 the count of leading 1s in the subnet mask.  For example, in `131.128.81.111/24` 
 24 indicates the count of leading 1s in the mask.
@@ -150,17 +151,17 @@ Your program will receive the following command line arguments:
 ```
 
 The line below shows an example of invoking your program upon a file 
-named `file.bin`.
+named `file.bin`:
 
 ```bash
 $ ./decode-ipv4 file.bin
 ```
 
 ### Output
-Your program should output the databank information to the `stdout`.  For each 
-consecutive 5 bytes in the binary file, display the corresponding IP/Subnet information.  
-Each chunk of 5 bytes encodes an IP (4 bytes) followed by the number of 1s in the 
-subnet mask (1 byte).
+Your program should output the decoded databank information to the `stdout`.  For each 
+consecutive 5 bytes in the binary file, display the corresponding IP/Subnet information. 
+Each chunk of 5 bytes encodes an IP (4 bytes) followed by an integer (1 byte) indicating 
+the number of 1s in the subnet mask.
 
 Observe the example below, revealing the IPs encoded in `file.bin` (file size is 15 bytes).
 
@@ -170,19 +171,19 @@ IP address:        222.110.11.20
 Subnet mask:       255.255.255.192
 Usable IP range:   222.110.11.1 - 222.110.11.62
 Network address:   222.110.11.0
-Broadcast address: 
+Broadcast address: 222.110.11.63
 
 IP address:        148.31.27.2
 Subnet mask:       255.255.255.0
 Usable IP range:   148.31.27.1 - 148.31.27.254
 Network address:   148.31.27.0
-Broadcast address: 
+Broadcast address: 148.31.27.255
 
 IP address:        32.10.10.1
 Subnet mask:       255.252.0.0
 Usable IP range:   32.8.0.1 - 32.11.255.254
 Network address:   32.8.0.0
-Broadcast address: 
+Broadcast address: 32.11.255.255
 ```
 
 ## Submission and Grading
@@ -195,8 +196,9 @@ above, in particular, using the exact input/output requirements.
 You will submit two files named `hexdump.c` and `decode-ipv4.c` via 
 Gradescope.  The autograder runs `gcc` on a `linux` machine.  It is 
 imperative that you ensure your code compiles and executes properly 
-with the `gcc` compiler.  You are **required** to include meaningful 
-comments in your code and use proper style and indentation.
+with the `gcc` compiler **prior to submission**.  You are also 
+required to include meaningful comments in your code and use proper 
+style and indentation.
 
 
 > [!CAUTION]
