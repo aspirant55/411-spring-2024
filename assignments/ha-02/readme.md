@@ -1,4 +1,4 @@
-# Homework Assignment 1 (due Feb 22th 11:59pm)
+# Homework Assignment 2 (due Feb 22th 11:59pm)
 
 In this assignment, we will explore the concept of **floating point representation**. 
 The assignment is worth a total of 100 points.  If you have any questions or need 
