@@ -107,7 +107,7 @@ $ ./fp-dump 2 2 d
 10011 -0.75
 ```
 
-The order of the outpur should follow strictly the order of the binary
+The order of the output should follow strictly the order of the binary
 numbers, from the smallest to the largest.
 
 ## Submission and Grading
