@@ -22,7 +22,7 @@ You will be prompted for your password.  Once you have logged in, you can
 run the following command to access the `RISC-V` toolchain:
 
 ```bash
-$ export PATH=$PATH:/user/local/riscv/bin
+$ export PATH=$PATH:/usr/local/riscv/bin
 ```
 
 The list of tools that you will/might use in this assignment are:
